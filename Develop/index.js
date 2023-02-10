@@ -43,7 +43,7 @@ const questions = [ {
       type: "list",
       name: "license",
       message: "Chose the appropriate license for this project: ",
-      Options: [
+      choices: [
         "Apache",
         "Unlicense",
         "Boost",
@@ -72,11 +72,11 @@ const questions = [ {
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) => {
+  fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
         if (err) {
             throw err;
         } else {
-            console.log('README file created!');
+            console.log('The README.md file was successfully written!');
         }
     });
 };
@@ -85,11 +85,13 @@ function writeToFile(fileName, data) {
 
 
 function init() {
-     inquirer.prompt(questions).then((answers) => {
-        writeToFile("README.md", answers);
-      });
+  inquirer.prompt(questions).then((answers) => {
+  let template = `# ${answers.title}\n\n\n\n\n`; 
+   
+   
+   writeToFile("README.md", template);
+   });
 };
-
 
 // Function call to initialize app
 init();
