@@ -86,5 +86,16 @@ function init() {
   });
 }
 
+//Create a function to initialize app
+function init() {
+     
+  inquirer.prompt(questions).then((data) => {
+ 
+    writeToFile("README.md", generateMarkdown(data));
+  });
+}
+// Function call to initialize app
+init();
+
     
     
